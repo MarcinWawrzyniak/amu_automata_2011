@@ -21,13 +21,13 @@ public class TestOctSingleCharacterOperator extends TestCase {
      */
     public void testOctSingleCharacterOperator() {
 
-        OctSingleCharacterOperator operator = new OctSingleCharacterOperator(120);
+        OctSingleCharacterOperator operator = new OctSingleCharacterOperator("120");
 
         assertNotNull(operator);
-        assertEquals(operator.getOctValue(), 120);
-        assertFalse(operator.getOctValue() == 80);
+        assertEquals(operator.getOctValue(), "120");
+        assertFalse(operator.getOctValue().equals("80"));
         try {
-            operator = new OctSingleCharacterOperator(200);
+            operator = new OctSingleCharacterOperator("200");
         } catch (Exception ex) {
             assertTrue(ex instanceof RuntimeException);
         }
@@ -39,7 +39,7 @@ public class TestOctSingleCharacterOperator extends TestCase {
      */
     public final void testCreateFixedAutomaton() {
 
-        OctSingleCharacterOperator operator = new OctSingleCharacterOperator(120);
+        OctSingleCharacterOperator operator = new OctSingleCharacterOperator("120");
         AutomatonSpecification automaton = operator.createFixedAutomaton();
         NondeterministicAutomatonByThompsonApproach result =
                 new NondeterministicAutomatonByThompsonApproach(automaton);
@@ -69,8 +69,8 @@ public class TestOctSingleCharacterOperator extends TestCase {
                 (OctSingleCharacterOperator) factory.doCreateOperator(list);
         assertNotNull(operator);
         assertEquals(1, factory.numberOfParams());
-        assertEquals(141, operator.getOctValue());
-        assertFalse(142 == operator.getOctValue());
+        assertEquals("141", operator.getOctValue());
+        assertFalse(operator.getOctValue().equals("142"));
         assertEquals('a', operator.getCharacter());
         assertFalse(operator.getCharacter() == 'Z');
         assertEquals("a".charAt(0), operator.getCharacter());
@@ -79,8 +79,8 @@ public class TestOctSingleCharacterOperator extends TestCase {
         operator = (OctSingleCharacterOperator) factory.createOperator(list);
         assertNotNull(operator);
         assertEquals(1, factory.numberOfParams());
-        assertEquals(132, operator.getOctValue());
-        assertFalse(142 == operator.getOctValue());
+        assertEquals("132", operator.getOctValue());
+        assertFalse(operator.getOctValue().equals("142"));
         assertEquals('Z', operator.getCharacter());
         assertFalse(operator.getCharacter() == 'a');
         assertEquals("Z".charAt(0), operator.getCharacter());
