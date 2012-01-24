@@ -1,7 +1,5 @@
 package pl.edu.amu.wmi.daut.re;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import pl.edu.amu.wmi.daut.base.AutomatonSpecification;
 import pl.edu.amu.wmi.daut.base.NaiveAutomatonSpecification;
 import java.util.List;

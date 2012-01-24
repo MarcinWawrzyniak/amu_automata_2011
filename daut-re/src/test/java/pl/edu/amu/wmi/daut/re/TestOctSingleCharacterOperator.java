@@ -52,7 +52,7 @@ public class TestOctSingleCharacterOperator extends TestCase {
         assertFalse(result.accepts("cc"));
         assertFalse(result.accepts("a"));
 
-        assertEquals(120, operator.getOctValue());
+        assertEquals("120", operator.getOctValue());
     }
 
     /**
@@ -86,7 +86,11 @@ public class TestOctSingleCharacterOperator extends TestCase {
         assertEquals("Z".charAt(0), operator.getCharacter());
         list.clear();
         list.add("999");
+        try {
         operator = (OctSingleCharacterOperator) factory.createOperator(list);
+        } catch (Exception ex) {
+            assertTrue(ex instanceof RuntimeException);
+        }
         assertNull(operator);
     }
 }
