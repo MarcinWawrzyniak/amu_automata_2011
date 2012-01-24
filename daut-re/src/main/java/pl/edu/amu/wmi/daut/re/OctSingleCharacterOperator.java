@@ -11,20 +11,20 @@ import java.util.List;
  */
 public class OctSingleCharacterOperator extends NullaryRegexpOperator {
 
-    private int octValue;
+    private String octValue;
     static final int BASE = 8;
 
     /**
      * Konstruktor.
      */
-    public OctSingleCharacterOperator(int a) {
+    public OctSingleCharacterOperator(String a) {
        this.setOctValue(a);
     }
 
     /**
      * Metoda, ustawia nową wartość ( sprawdza czy jest w kodzie ósemkowym).
      */
-    private void setOctValue(int i) {
+    private void setOctValue(String i) {
         if (isOctal(i))
             this.octValue = i;
         else throw new RuntimeException();
@@ -33,7 +33,7 @@ public class OctSingleCharacterOperator extends NullaryRegexpOperator {
     /**
      * Metoda zwraca aktualną wartość (w kodzie ósemkowym).
      */
-    public int getOctValue() {
+    public String getOctValue() {
         return octValue;
     }
 
@@ -41,16 +41,16 @@ public class OctSingleCharacterOperator extends NullaryRegexpOperator {
      * Metoda zwraca znak odpowiadający aktualnej wartości octValue.
      */
     public char getCharacter() {
-        return (char) Integer.parseInt(Integer.toString(octValue), BASE);
+        return (char) Integer.parseInt(octValue, BASE);
     }
 
     /**
      * Metoda sprawdza, czy wartość jest w kodzie ósemkowym.
      */
-    private boolean isOctal(int number) {
+    private boolean isOctal(String number) {
 
         try {
-                Integer.parseInt(Integer.toString(number), BASE);
+                Integer.parseInt(number, BASE);
             } catch (Exception ex) {
                 return false;
             }
@@ -60,7 +60,7 @@ public class OctSingleCharacterOperator extends NullaryRegexpOperator {
     @Override
     public AutomatonSpecification createFixedAutomaton() {
 
-        int intValue = Integer.parseInt(Integer.toString(octValue), BASE);
+        int intValue = Integer.parseInt(octValue, BASE);
 
         return new NaiveAutomatonSpecification()
                 .makeOneTransitionAutomaton((char) intValue);
@@ -81,10 +81,9 @@ public class OctSingleCharacterOperator extends NullaryRegexpOperator {
             OctSingleCharacterOperator oper = null;
 
             try {
-                oper = new OctSingleCharacterOperator(Integer.parseInt(params.get(0)));
+                oper = new OctSingleCharacterOperator(params.get(0));
             } catch (Exception ex) {
-                Logger.getLogger(OctSingleCharacterOperator.class.getName())
-                        .log(Level.SEVERE, null, ex);
+                throw new RuntimeException();
             }
             return oper;
         }
