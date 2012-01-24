@@ -91,6 +91,5 @@ public class TestOctSingleCharacterOperator extends TestCase {
         } catch (Exception ex) {
             assertTrue(ex instanceof RuntimeException);
         }
-        assertNull(operator);
     }
 }
